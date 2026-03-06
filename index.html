@@ -11,32 +11,31 @@
         :root { 
             --gold: #c5a059; 
             --black: #000000; 
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass: rgba(255, 255, 255, 0.07);
+            --glass-border: rgba(255, 255, 255, 0.15);
             --white: #ffffff;
         }
         
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             font-family: 'Montserrat', sans-serif; 
             color: var(--white); 
             background: var(--black);
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* --- Анимация звездного неба (Фон) --- */
-        @keyframes move-twinkle-back {
-            from {background-position:0 0;}
-            to {background-position:-10000px 5000px;}
+        /* --- Анимированный фон со звездами --- */
+        @keyframes stars-animation {
+            from { background-position: 0 0; }
+            to { background-position: -10000px 5000px; }
         }
 
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #000 url(https://www.script-tutorials.com/demos/360/images/stars.png) repeat top center;
+            background: #000 url(https://www.script-tutorials.com/demos/360/images/stars.png) repeat;
             z-index: -2;
         }
 
@@ -44,250 +43,162 @@
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: transparent url(https://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
+            background: transparent url(https://www.script-tutorials.com/demos/360/images/twinkling.png) repeat;
             z-index: -1;
-            animation: move-twinkle-back 200s linear infinite;
+            animation: stars-animation 250s linear infinite;
         }
 
-        /* --- Общие стили "Стекла" --- */
-        .glass-panel {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-
-        /* --- Шапка сайта --- */
         header { 
             padding: 20px 5%; 
-            position: fixed; top: 0; width: 100%;
-            z-index: 100;
+            position: absolute; top: 0; width: 100%;
             display: flex; justify-content: center;
-            border-bottom: 1px solid var(--glass-border);
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
+            z-index: 10;
         }
-        .logo { font-size: 26px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); }
-        .logo span { color: var(--white); font-weight: 300; }
+        .logo { font-size: 26px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); }
 
         /* --- Главный экран --- */
         .hero {
-            height: 100vh;
+            height: 90vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('IMG_4072.jpeg') center/cover no-repeat;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('IMG_4072.jpeg') center/cover no-repeat;
             padding: 20px;
-            margin-bottom: 50px;
         }
-        .hero h1 { font-size: clamp(2.2rem, 6vw, 4rem); margin-bottom: 15px; letter-spacing: 3px; text-transform: uppercase; color: var(--white); text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .hero p { font-size: 1.2rem; color: var(--gold); font-weight: 300; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 1px; }
+        .hero h1 { font-size: clamp(2rem, 6vw, 4rem); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        .hero p { color: var(--gold); margin-bottom: 30px; letter-spacing: 2px; font-weight: 300; }
 
-        /* --- Кнопки (Золото) --- */
-        .btn-group { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
         .btn { 
-            padding: 18px 40px; 
-            border-radius: 50px;
-            text-decoration: none; 
-            font-weight: 600; 
-            transition: 0.4s; 
-            text-transform: uppercase;
-            font-size: 13px;
-            letter-spacing: 2px;
-            display: flex; align-items: center; gap: 10px;
-            position: relative; overflow: hidden;
+            padding: 16px 35px; border-radius: 5px; text-decoration: none; font-weight: 600; transition: 0.3s; 
+            text-transform: uppercase; font-size: 12px; letter-spacing: 2px; display: flex; align-items: center; gap: 10px;
         }
         .btn-gold { background: var(--gold); color: var(--black); border: 1px solid var(--gold); }
-        .btn-gold:hover { background: transparent; color: var(--gold); box-shadow: 0 0 20px rgba(197, 160, 89, 0.5); }
+        .btn-gold:hover { background: transparent; color: var(--gold); }
 
-        /* --- Секция Карусели (Листание слева направо) --- */
-        .section { padding: 80px 0; max-width: 100%; margin: 0 auto; position: relative; }
-        .section-title { text-align: center; margin-bottom: 60px; font-size: 28px; text-transform: uppercase; letter-spacing: 5px; color: var(--white); }
-        .section-title span { color: var(--gold); }
+        /* --- Секция Каталога (Ручной слайдер) --- */
+        .section { padding: 80px 5%; }
+        .section-title { text-align: center; margin-bottom: 50px; font-size: 24px; text-transform: uppercase; letter-spacing: 4px; color: var(--gold); }
 
-        /* Контейнер карусели */
-        .carousel-container {
-            width: 100%;
-            overflow: hidden; /* Скрываем то, что вылезает */
-            position: relative;
-            padding: 20px 0;
-        }
-
-        .carousel-track {
+        .slider-wrapper {
             display: flex;
-            gap: 30px;
-            padding: 0 5%;
-            /* Анимация бесконечного листания */
-            animation: scroll 30s linear infinite;
-            width: calc(350px * 8 + 30px * 8); /* Ширина 4 карт + 4 дубликатов */
+            overflow-x: auto; /* Позволяет листать самому */
+            gap: 25px;
+            padding: 20px 0 40px 0;
+            scrollbar-width: none; /* Скрываем полосу в Firefox */
+            -ms-overflow-style: none; /* Скрываем полосу в IE */
+            scroll-snap-type: x mandatory; /* Магнитный эффект при листании */
         }
+        .slider-wrapper::-webkit-scrollbar { display: none; /* Скрываем полосу в Chrome/Safari */ }
 
-        /* Остановка анимации при наведении */
-        .carousel-container:hover .carousel-track {
-            animation-play-state: paused;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-350px * 4 - 30px * 4)); }
-        }
-
-        /* Карточка товара (Стеклянная) */
         .card { 
-            flex: 0 0 350px; /* Фиксированная ширина карты */
-            height: 450px;
-            background: rgba(255, 255, 255, 0.03);
+            flex: 0 0 320px; 
+            height: 480px;
+            background: var(--glass);
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             overflow: hidden;
+            scroll-snap-align: center;
             transition: 0.4s;
             display: flex; flex-direction: column;
-            text-decoration: none; color: inherit;
         }
-        .card:hover { transform: scale(1.03); border-color: var(--gold); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .card:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(197, 160, 89, 0.2); }
         
-        .card-img-wrapper { width: 100%; height: 70%; overflow: hidden; position: relative; }
-        .card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card-img { width: 100%; height: 80%; overflow: hidden; }
+        .card img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
         .card:hover img { transform: scale(1.1); }
-        
-        /* Градиент поверх фото для читаемости текста */
-        .card-img-wrapper::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+
+        .card-h { 
+            height: 20%; display: flex; align-items: center; justify-content: center; 
+            background: rgba(0,0,0,0.4); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--white);
         }
 
-        .card-content { padding: 25px; flex-grow: 1; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); }
-        .card-h { text-align: center; font-weight: 600; font-size: 18px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); }
+        /* --- Контакты (Стеклянный блок) --- */
+        .contacts { padding: 60px 5%; text-align: center; }
+        .glass-box { 
+            max-width: 700px; margin: 0 auto; padding: 50px; 
+            background: var(--glass); backdrop-filter: blur(20px); 
+            border: 1px solid var(--glass-border); border-radius: 30px;
+        }
+        .phone-link { font-size: clamp(24px, 5vw, 36px); color: var(--gold); text-decoration: none; display: block; margin: 25px 0; font-weight: 300; }
 
-        /* --- Контакты --- */
-        .contacts { padding: 100px 5%; text-align: center; position: relative; }
-        .contacts-content { max-width: 800px; margin: 0 auto; padding: 60px; }
-        .contacts h2 { color: var(--white); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 3px; }
-        .phone-link { font-size: 36px; color: var(--gold); text-decoration: none; display: block; margin-bottom: 50px; font-weight: 300; letter-spacing: 1px; transition: 0.3s; }
-        .phone-link:hover { color: var(--white); text-shadow: 0 0 15px var(--gold); }
+        /* --- Футер --- */
+        footer { padding: 40px 5%; text-align: center; background: rgba(0,0,0,0.5); border-top: 1px solid var(--glass-border); margin-top: 50px; }
+        .brands { color: #777; font-size: 12px; margin-bottom: 20px; line-height: 2.2; text-transform: uppercase; }
 
-        /* --- Бренды Футер --- */
-        footer { padding: 60px 5%; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.8); }
-        .brands { color: #666; font-size: 13px; max-width: 900px; margin: 0 auto 30px; line-height: 2.5; text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* --- Плавающие кнопки связи (Золото) --- */
-        .fixed-nav { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 1000; }
+        /* --- Кнопки связи --- */
+        .fixed-nav { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 15px; z-index: 100; }
         .circle { 
             width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            color: var(--black); background: var(--gold); font-size: 26px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
-            transition: 0.4s; text-decoration: none; position: relative;
+            color: var(--black); background: var(--gold); font-size: 24px; box-shadow: 0 8px 20px rgba(0,0,0,0.4); text-decoration: none;
         }
-        .circle:hover { transform: scale(1.1) rotate(10deg); background: var(--white); }
-        
-        /* Пульсация для кнопок */
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
-        }
-        .circle { animation: pulse 2s infinite; }
 
-        /* Адаптивность для мобильных */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 1.8rem; }
-            .btn { width: 100%; justify-content: center; }
-            .phone-link { font-size: 26px; }
-            .contacts-content { padding: 30px; }
-            .card { flex: 0 0 280px; height: 380px; } /* Чуть меньше карты на мобильных */
-            @keyframes scroll {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(calc(-280px * 4 - 30px * 4)); }
-            }
-            .carousel-track { width: calc(280px * 8 + 30px * 8); }
+        @media (max-width: 480px) {
+            .card { flex: 0 0 85vw; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">Asyl<span>Tech</span></div>
+        <div class="logo">Asyl Tech</div>
     </header>
 
     <section class="hero">
-        <h1>Премиальная техника</h1>
-        <p>Эстетика и качество для вашего дома</p>
+        <h1>Premium Kitchen</h1>
+        <p>Качественная техника для вашего дома</p>
         <div class="btn-group">
-            <a href="https://wa.me/77073393939" class="btn btn-gold">
-                <i class="fab fa-whatsapp"></i> WhatsApp
-            </a>
-            <a href="https://l.kaspi.kz/shop/7TnqyqvDewU8xKH" class="btn btn-gold">
-                <i class="fas fa-shopping-cart"></i> Kaspi Магазин
-            </a>
+            <a href="https://wa.me/77073393939" class="btn btn-gold"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="https://l.kaspi.kz/shop/7TnqyqvDewU8xKH" class="btn btn-gold"><i class="fas fa-shopping-cart"></i> Kaspi</a>
         </div>
     </section>
 
     <section class="section">
-        <h2 class="section-title">Наш <span>Каталог</span></h2>
-        <div class="carousel-container">
-            <div class="carousel-track">
-                
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="IMG_4068.jpeg" alt="Духовые шкафы"></div>
-                    <div class="card-content"><div class="card-h">Духовые шкафы</div></div>
-                </div>
-
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="IMG_4069.jpeg" alt="Вытяжки"></div>
-                    <div class="card-content"><div class="card-h">Вытяжки</div></div>
-                </div>
-
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="IMG_4070.jpeg" alt="Холодильники"></div>
-                    <div class="card-content"><div class="card-h">Холодильники</div></div>
-                </div>
-
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="IMG_4071.jpeg" alt="Мойки"></div>
-                    <div class="card-content"><div class="card-h">Мойки</div></div>
-                </div>
-
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="IMG_4068.jpeg" alt="Духовые шкафы"></div>
-                    <div class="card-content"><div class="card-h">Духовые шкафы</div></div>
-                </div>
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="IMG_4069.jpeg" alt="Вытяжки"></div>
-                    <div class="card-content"><div class="card-h">Вытяжки</div></div>
-                </div>
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="IMG_4070.jpeg" alt="Холодильники"></div>
-                    <div class="card-content"><div class="card-h">Холодильники</div></div>
-                </div>
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="IMG_4071.jpeg" alt="Мойки"></div>
-                    <div class="card-content"><div class="card-h">Мойки</div></div>
-                </div>
-
+        <h2 class="section-title">Каталог техники</h2>
+        <div class="slider-wrapper">
+            
+            <div class="card">
+                <div class="card-img"><img src="IMG_4068.jpeg" alt="Духовки"></div>
+                <div class="card-h">Духовые шкафы</div>
             </div>
+
+            <div class="card">
+                <div class="card-img"><img src="IMG_4069.jpeg" alt="Вытяжки"></div>
+                <div class="card-h">Вытяжки</div>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="IMG_4070.jpeg" alt="Холодильники"></div>
+                <div class="card-h">Холодильники</div>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="IMG_4071.jpeg" alt="Мойки"></div>
+                <div class="card-h">Мойки</div>
+            </div>
+
         </div>
+        <p style="text-align: center; color: var(--gold); font-size: 12px; opacity: 0.7;">← Листайте вправо или влево →</p>
     </section>
 
     <section class="contacts">
-        <div class="glass-panel contacts-content">
-            <h2>Консультация</h2>
+        <div class="glass-box">
+            <h2>Связаться с нами</h2>
             <a href="tel:+77073393939" class="phone-link">+7 (707) 339-39-39</a>
             <div class="btn-group">
-                <a href="https://wa.me/77073393939" class="btn btn-gold">Написать нам</a>
+                <a href="https://wa.me/77073393939" class="btn btn-gold">Написать менеджеру</a>
             </div>
         </div>
     </section>
 
     <footer>
-        <p class="brands">
-            Bosch • Siemens • Blanco • Electrolux • Franke • Liebherr • Teka • Climadiff • Whirlpool • Hotpoint • Ariston
-        </p>
-        <p style="letter-spacing: 2px; font-size: 10px; color: #444;">© 2026 ASYL TECH. ALL RIGHTS RESERVED.</p>
+        <p class="brands">Bosch • Siemens • Blanco • Electrolux • Franke • Liebherr • Teka • Climadiff • Whirlpool • Hotpoint • Ariston</p>
+        <p style="font-size: 10px; color: #444;">© 2026 ASYL TECH</p>
     </footer>
 
     <div class="fixed-nav">
-        <a href="https://wa.me/77073393939" class="circle" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="tel:+77073393939" class="circle" title="Позвонить"><i class="fas fa-phone"></i></a>
+        <a href="https://wa.me/77073393939" class="circle"><i class="fab fa-whatsapp"></i></a>
+        <a href="tel:+77073393939" class="circle"><i class="fas fa-phone"></i></a>
     </div>
 
 </body>
