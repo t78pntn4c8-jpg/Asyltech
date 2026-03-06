@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asyl Tech | Кухонная техника</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --accent: #c5a059; --dark: #1a1a1a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; color: #333; }
+
+        header { padding: 20px 5%; text-align: center; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .logo { font-size: 28px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; }
+        .logo span { color: var(--accent); }
+
+        /* Главный экран */
+        .hero {
+            height: 80vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            /* ФОТО:  IMG_4072.jpeg*/
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('hero.jpg') center/cover no-repeat;
+            color: white; padding: 20px;
+        }
+
+        .hero h1 { font-size: clamp(1.8rem, 5vw, 3.5rem); margin-bottom: 15px; }
+        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+        
+        .btn { padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.3s; color: white; display: flex; align-items: center; gap: 10px; }
+        .wa { background: #25d366; }
+        .kaspi { background: #f14635; }
+        .btn:hover { transform: scale(1.05); }
+
+        /* Сетка категорий */
+        .section { padding: 60px 5%; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; margin-bottom: 40px; font-size: 28px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        
+        .card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s; text-decoration: none; color: inherit; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        
+        .card img { width: 100%; height: 220px; object-fit: cover; }
+        .card-h { padding: 20px; text-align: center; font-weight: 600; font-size: 18px; }
+
+        /* Футер и бренды */
+        footer { background: #f9f9f9; padding: 50px 5%; text-align: center; border-top: 1px solid #eee; }
+        .brands { color: #888; font-size: 14px; margin-bottom: 20px; line-height: 2; }
+        
+        /* Кнопки в углу */
+        .fixed-nav { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 999; }
+        .circle { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+
+    <header><div class="logo">Asyl<span>Tech</span></div></header>
+
+    <section class="hero">
+        <h1>Качественная техника для кухни</h1>
+        <p>Bosch, Siemens, Electrolux и другие мировые бренды</p>
+        <div class="btn-group">
+            <a href="https://wa.me/77073393939" class="btn wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="https://l.kaspi.kz/shop/7TnqyqvDewU8xKH" class="btn kaspi"><i class="fas fa-shopping-cart"></i> Kaspi Магазин</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Каталог техники</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="IMG_4068.jpeg" alt="Духовки">
+                <div class="card-h">Духовые шкафы</div>
+            </div>
+            <div class="card">
+                <img src  "IMG_4069.jpeg" alt="Вытяжки">
+                <div class="card-h">Вытяжки</div>
+            </div>
+            <div class="card">
+                <img src="IMG_4070.jpeg" alt="Холодильники">
+                <div class="card-h">Холодильники</div>
+            </div>
+            <div class="card">
+                <img src="IMG_4071.jpeg" alt="Мойки">
+                <div class="card-h">Мойки</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>Бренды:</strong></p>
+        <p class="brands">Bosch • Siemens • Blanco • Electrolux • Franke • Liebherr • Teka • Climadiff • Whirlpool • Hotpoint • Ariston</p>
+        <p>г. Алматы | <a href="tel:+77073393939" style="color: inherit;">+7 (707) 3393939</a></p>
+    </footer>
+
+    <div class="fixed-nav">
+        <a href="https://wa.me/77073393939" class="circle wa"><i class="fab fa-whatsapp"></i></a>
+        <a href="tel:+77073393939" class="circle" style="background: #333;"><i class="fas fa-phone"></i></a>
+    </div>
+
+</body>
+</html>
